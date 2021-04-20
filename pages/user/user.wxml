@@ -1,0 +1,36 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <block wx:if="{{canIUseOpenData}}" calss="userinfo-opendata">
+      <view class="userinfo-avatar">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+    </block>
+  </view>
+  <view class="userName">
+    <view style="display:flex;flex-direction:row;">
+      <text>姓名:</text>
+      <input wx:if="{{buttonText=='编辑信息'}}" model:value="{{userInfo.userName}}" disabled="true" maxlength="20"
+        placeholder="姓名" />
+      <input wx:if="{{buttonText=='完成信息'}}" model:value="{{userInfo.userName}}" maxlength="20" bindinput="userNameInput"
+        style="border:1px #ccc solid;" />
+    </view>
+    <view style="display:flex;flex-direction:row;margin-top:50px;">
+      <text>电话:</text>
+      <input wx:if="{{buttonText=='编辑信息'}}" model:value="{{userInfo.mobile}}" disabled="true" maxlength="20"
+        placeholder="电话" />
+      <input wx:if="{{buttonText=='完成信息'}}" model:value="{{userInfo.mobile}}" maxlength="20" bindinput="mobileInput"
+        style="border:1px #ccc solid;" />
+    </view>
+    <view style="display:flex;flex-direction:row;margin-top:50px;">
+      <picker bindchange="roleSelect" mode="selector" range="{{roleList}}">
+        <view class="picker" >
+          角色:{{userInfo.role}}
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class="edit-msg">
+    <button type="primary" bindtap="editMsgClick">{{buttonText}}</button>
+  </view>
+</view>

@@ -1,0 +1,56 @@
+<!--pages/proRoom/proRoom.wxml-->
+<view>
+    <!--水平滚动-->
+    <scroll-view scroll-x="true" style=" white-space: nowrap; display: flex">
+        <!--  display: inline-block-->
+        <block wx:for="{{days}}" wx:key="key">
+            <view style="width: 70px; display: inline-block;padding:0px 5px;text-align:center;">
+                <view wx:if="{{selectDay==item.newday}}" style="background:#79FF79" >
+                    <view style="border:1px #ccc solid;border-bottom:none;">
+                        <view style="">
+                            {{item.newday}}
+                        </view>
+                    </view>
+                    <view style="border:1px #ccc solid;border-top:none;">
+                        {{item.day}}
+                    </view>
+                </view>
+                <view wx:if="{{selectDay!=item.newday}}" bindtap="timeClick" data-selectDay="{{item.newday}}">
+                    <view style="border:1px #ccc solid;border-bottom:none;">
+                        <view style="">
+                            {{item.newday}}
+                        </view>
+                    </view>
+                    <view style="border:1px #ccc solid;border-top:none;">
+                        {{item.day}}
+                    </view>
+                </view>
+            </view>
+        </block>
+    </scroll-view>
+
+    <view class="table">
+        <view class="tr bg-w">
+            <view class="th">时间段</view>
+            <view class="th">状态</view>
+            <view class="th">操作</view>
+        </view>
+        <block wx:for="{{listData}}" wx:key="{[code]}">
+            <view class="tr bg-g" wx:if="{{index % 2 == 0}}">
+                <view class="td" >{{item.time}}</view>
+                <view class="td" >{{item.status}}</view>
+                <button class="td" style="width:36%;" type="primary" wx:if="{{item.operate=='预约'||item.operate=='开门'}}" bindtap="proButton" data-subscribeTime="{{item.time}}"
+                data-operate="{{item.operate}}"
+                >{{item.operate}}</button>
+                <button class="td" style="width:36%;height:80%;" type="default"  wx:if="{{item.operate!='预约'&&item.operate!='开门'}}" >{{item.operate}}</button>
+            </view>
+            <view class="tr" wx:else>
+                <view class="td" >{{item.time}}</view>
+                <view class="td" >{{item.status}}</view>
+                <button class="td" style="width:36%;height:80%;" type="primary" wx:if="{{item.operate=='预约'||item.operate=='开门'}}" bindtap="proButton" data-subscribeTime="{{item.time}}"  data-operate="{{item.operate}}"
+                >{{item.operate}}</button>
+                <button class="td" style="width:36%;height:80%;" type="warn" wx:if="{{item.operate!='预约'&&item.operate!='开门'}}">{{item.operate}}</button>
+            </view>
+        </block>
+    </view>
+</view>

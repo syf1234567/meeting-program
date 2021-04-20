@@ -1,0 +1,46 @@
+<!--index.wxml-->
+<view>
+  <!--导航条-->
+  <view class="navbar">
+    <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique"
+      bindtap="navbarTap">{{item}}</text>
+  </view>
+  <view hidden="{{currentTab!==0}}">
+    <view>
+      <image src="../../images/logo.jpg" style="width:100%;"></image>
+    </view>
+    <block wx:for="{{allRoom}}" wx:key="key">
+      <view class="room-box">
+        <image src="../../images/会议室.png" class="room-image"></image>
+        <text>
+          {{item.name}}
+        </text>
+        <view class="peoper_num">
+          <text>
+             <!-- 最多容纳人数:{{item.maxNum}} -->
+          </text>
+          <button type="primary" class="pro_room" style="width:80%;margin-top:60rpx;" bindtap="proRoomButton" data-item="{{item}}">预约</button>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view hidden="{{currentTab!==1}}">
+    <view>
+      <image src="../../images/logo.jpg" style="width:100%;"></image>
+    </view>
+    <block wx:for="{{myRoom}}" wx:key="key">
+      <view class="room-box">
+        <image src="../../images/会议室.png" class="room-image"></image>
+        <text>
+          {{item.name}}
+        </text>
+        <view class="peoper_num">
+          <text >
+            <!-- 最多容纳人数:{{item.maxNum}} -->
+          </text>
+          <button type="primary" class="pro_room" style="width:100%;margin-top:60rpx;" bindtap="proDistail" data-item="{{item}}">详情</button>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
