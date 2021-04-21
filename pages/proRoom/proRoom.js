@@ -177,16 +177,21 @@ Page({
         listData.forEach(function (list, index) {
           let msg = ""
           res.data.forEach(function (history, index) {
+            if (self.data.selectDay == self.dealTime(0).newday && list.time.split("-")[0] <= nowDate && list.time.split("-")[1] >= nowDate&&history.status=='未预约') {
+              msg = "开门";
+            }
             if (list.time == history.subscribeTime && self.data.selectDay == history.day) {
-              msg = "已预约";
+              if(getApp().globalData.userInfo.id==history.userId){
+                  msg="自己开门"
+              }else{
+                msg = "已预约";
+              }
             }
           })
           if (self.data.selectDay == self.dealTime(0).newday && list.time.split("-")[1] <= nowDate) {
             msg = "过时";
           }
-          if (self.data.selectDay == self.dealTime(0).newday && list.time.split("-")[0] <= nowDate && list.time.split("-")[1] >= nowDate&&(list.status=='已预约'||list.status=='开门')) {
-            msg = "开门";
-          }
+          
           if (msg == "已预约") {
             list.status = "已被预约"
             list.operate = ""
@@ -196,12 +201,16 @@ Page({
             list.operate = ""
           }
           if (msg == "开门") {
-            list.status = "未预约"
+            list.status = "开门"
             list.operate = "开门"
           }
           if (msg == "") {
             list.status = "未预约"
             list.operate = "预约"
+          }
+          if(msg=="自己开门"){
+            list.status = "已开门"
+            list.operate = "开门"
           }
         })
         self.setData({
@@ -213,6 +222,7 @@ Page({
 
   proButton: function (e) {
     let subscribeTime = e.currentTarget.dataset.subscribetime;
+    let operate = e.currentTarget.dataset.operate;
     let self = this;
     if (e.currentTarget.dataset.operate == "预约") {
       wx.request({
@@ -244,7 +254,7 @@ Page({
         }
       })
     }
-    let operate = e.currentTarget.dataset.operate;
+    
     if (operate == "开门") {
       wx.request({
         url: getApp().globalData.requestUrl + "/meetingRoom/getById",

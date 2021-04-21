@@ -127,7 +127,7 @@ Page({
           }
           if(list.status=="开门"){
             list.status = "已开门"
-            list.operate = ""
+            list.operate = "开门"
           }
           if( list.status=="取消预约"){
             list.status = "已取消预约"
@@ -146,8 +146,6 @@ Page({
   },
   proButton: function (e) {
     let self = this
-    console.log(e.currentTarget.dataset.id);
-    console.log(e.currentTarget.dataset.operate);
     if (e.currentTarget.dataset.operate != "") {
       wx.request({
         url: getApp().globalData.requestUrl + "/subscribeHistory/update",
@@ -157,6 +155,28 @@ Page({
         },
         success: function (res) {
           self.getState(self.data.roomId, self.data.selectDay)
+        }
+      })
+    }
+    if(e.currentTarget.dataset.operate == "开门"){
+      wx.request({
+        url: getApp().globalData.requestUrl + "/meetingRoom/getById",
+        data: {
+          id: e.currentTarget.dataset.roomid
+        },
+        success: function (res) {
+          wx.request({
+            url: 'http://www.jyyltech.com/IOTREST/UserInfoService/OPENAPI/BasicApi/',
+            data: {
+              ablity: res.data.ablity,
+              applictionId: res.data.applictionId,
+              applictionSecrit: res.data.applictionSecrit,
+              productId: res.data.productId,
+              deviceId: res.data.deviceId,
+              msg_id: res.data.msgId,
+              service: JSON.parse(res.data.service)
+            }
+          })
         }
       })
     }

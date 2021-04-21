@@ -40,6 +40,7 @@
         <view class="td">{{item.subscribeTime}}</view>
         <view class="td">{{item.status}}</view>
         <button class="td" style="width:36%;" type="primary" wx:if="{{item.operate=='开门'}}" bindtap="proButton"  data-id="{{item.id}}" data-status="{{item.status}}"
+        data-roomId="{{item.roomId}}"
         data-operate="{{item.operate}}"
           data-subscribeTime="{{item.subscribeTime}}">{{item.operate}}</button>
           <button class="td" style="width:36%;" wx:if="{{item.operate=='取消预约'}}" bindtap="proButton" data-operate="{{item.operate}}" data-id="{{item.id}}"
@@ -50,7 +51,7 @@
       <view class="tr" wx:else>
         <view class="td">{{item.subscribeTime}}</view>
         <view class="td">{{item.status}}</view>
-        <button class="td" style="width:36%;height:80%;" type="primary" wx:if="{{item.operate=='开门'}}"
+        <button class="td" style="width:36%;height:80%;" type="primary" wx:if="{{item.operate=='开门'}}"  data-roomId="{{item.roomId}}"
           bindtap="proButton" data-id="{{item.id}}" data-status="{{item.status}}" data-operate="{{item.operate}}">{{item.operate}}</button>
         <button class="td" style="width:36%;height:80%;" 
           wx:if="{{item.operate=='取消预约'}}" data-operate="{{item.operate}}" data-id="{{item.id}}" bindtap="proButton">{{item.operate}}</button>
