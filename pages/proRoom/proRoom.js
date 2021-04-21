@@ -35,7 +35,7 @@ Page({
         "operate": ""
       },
       {
-        "time": "16:00-18:00",
+        "time": "18:00-20:00",
         "status": "",
         "operate": ""
       },
@@ -177,21 +177,25 @@ Page({
         listData.forEach(function (list, index) {
           let msg = ""
           res.data.forEach(function (history, index) {
-            if (self.data.selectDay == self.dealTime(0).newday && list.time.split("-")[0] <= nowDate && list.time.split("-")[1] >= nowDate&&history.status=='未预约') {
+            if (self.data.selectDay == self.dealTime(0).newday && list.time.split("-")[0] <= nowDate && list.time.split("-")[1] >= nowDate && history.status == '未预约') {
               msg = "开门";
             }
-            if (list.time == history.subscribeTime && self.data.selectDay == history.day) {
-              if(getApp().globalData.userInfo.id==history.userId){
-                  msg="自己开门"
-              }else{
+            if (history.status == "已预约" && list.time == history.subscribeTime&&self.data.selectDay==history.day) {
+              msg = "已预约";
+            }
+            if (self.data.selectDay == self.dealTime(0).newday && list.time == history.subscribeTime) {
+              if (getApp().globalData.userInfo.id == history.userId) {
+                msg = "自己开门"
+              } else if (list.time == history.subscribeTime && self.data.selectDay == history.day && history.status == "已预约") {
                 msg = "已预约";
+              } else {
+                //msg = "已预约";
               }
             }
           })
           if (self.data.selectDay == self.dealTime(0).newday && list.time.split("-")[1] <= nowDate) {
             msg = "过时";
           }
-          
           if (msg == "已预约") {
             list.status = "已被预约"
             list.operate = ""
@@ -208,7 +212,7 @@ Page({
             list.status = "未预约"
             list.operate = "预约"
           }
-          if(msg=="自己开门"){
+          if (msg == "自己开门") {
             list.status = "已开门"
             list.operate = "开门"
           }
@@ -254,7 +258,7 @@ Page({
         }
       })
     }
-    
+
     if (operate == "开门") {
       wx.request({
         url: getApp().globalData.requestUrl + "/meetingRoom/getById",
