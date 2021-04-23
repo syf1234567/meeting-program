@@ -184,7 +184,7 @@ Page({
               msg = "已预约";
             }
             if (self.data.selectDay == self.dealTime(0).newday && list.time == history.subscribeTime) {
-              if (getApp().globalData.userInfo.id == history.userId) {
+              if (getApp().globalData.userInfo.id == history.userId&&list.time.split("-")[0] <= nowDate && list.time.split("-")[1] >= nowDate) {
                 msg = "自己开门"
               } else if (list.time == history.subscribeTime && self.data.selectDay == history.day && history.status == "已预约") {
                 msg = "已预约";

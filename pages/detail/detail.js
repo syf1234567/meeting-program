@@ -125,11 +125,7 @@ Page({
             list.status = "已开门"
             list.operate = "开门"
           }
-          if(list.status=="开门"){
-            list.status = "已开门"
-            list.operate = "开门"
-          }
-          if( list.status=="取消预约"){
+          if(list.status=="取消预约"){
             list.status = "已取消预约"
             list.operate = ""
           }
