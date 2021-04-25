@@ -214,7 +214,7 @@ Page({
           }
           if (msg == "自己开门") {
             list.status = "已开门"
-            list.operate = "开门"
+            list.operate = ""
           }
         })
         self.setData({
