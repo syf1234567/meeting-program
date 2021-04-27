@@ -122,11 +122,11 @@ Page({
             list.operate = "取消预约"
           }
           if(list.status=="开门"){
-            list.status = "已开门"
+            list.status = "可开门"
             list.operate = "开门"
           }
           if (msg == "签到") {
-            list.status = "已开门"
+            list.status = "可开门"
             list.operate = "开门"
           }
           if(list.status=="取消预约"){
