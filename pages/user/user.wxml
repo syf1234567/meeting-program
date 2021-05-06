@@ -1,36 +1,30 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <block wx:if="{{canIUseOpenData}}" calss="userinfo-opendata">
-      <view class="userinfo-avatar">
-        <open-data type="userAvatarUrl"></open-data>
-      </view>
-    </block>
-  </view>
+<view class="">
   <view class="userName">
-    <view style="display:flex;flex-direction:row;">
-      <text>姓名:</text>
+    <view style="display:flex;flex-direction:row;align-items: center;">
+      <view class="userinfo" style="width:100px;height:100px;">
+        <block wx:if="{{canIUseOpenData}}" calss="userinfo-opendata">
+          <view class="userinfo-avatar">
+            <open-data type="userAvatarUrl"></open-data>
+          </view>
+        </block>
+      </view>
+      <text>学号:</text>
       <input wx:if="{{buttonText=='编辑信息'}}" model:value="{{userInfo.userName}}" disabled="true" maxlength="20"
-        placeholder="姓名" />
+        placeholder="学号" />
       <input wx:if="{{buttonText=='完成信息'}}" model:value="{{userInfo.userName}}" maxlength="20" bindinput="userNameInput"
         style="border:1px #ccc solid;" />
     </view>
-    <view style="display:flex;flex-direction:row;margin-top:50px;">
-      <text>电话:</text>
-      <input wx:if="{{buttonText=='编辑信息'}}" model:value="{{userInfo.mobile}}" disabled="true" maxlength="20"
-        placeholder="电话" />
-      <input wx:if="{{buttonText=='完成信息'}}" model:value="{{userInfo.mobile}}" maxlength="20" bindinput="mobileInput"
-        style="border:1px #ccc solid;" />
+    <view style="display:flex;flex-direction:row;margin-top:50px;" bindtap="modifyPassword">
+      <image src="./modify.png" style="width:20px;height:20px;padding:15px;"></image>
+      <text style="line-height:45px;">修改登录密码</text>
     </view>
-    <view style="display:flex;flex-direction:row;margin-top:50px;">
-      <picker bindchange="roleSelect" mode="selector" range="{{roleList}}">
-        <view class="picker" >
-          角色:{{userInfo.role}}
-        </view>
-      </picker>
+    <view style="display:flex;flex-direction:row;margin-top:50px;"bindtap="feedback">
+      <image src="./nodify.png" style="width:20px;height:20px;padding:15px;"></image>
+      <text style="line-height:45px;">意见反馈</text>
     </view>
   </view>
   <view class="edit-msg">
-    <button type="primary" bindtap="editMsgClick">{{buttonText}}</button>
+    <button type="primary" bindtap="exit">退出登录</button>
   </view>
 </view>

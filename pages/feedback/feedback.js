@@ -1,4 +1,4 @@
-// pages/login/login.js
+// pages/feedback/feedback.js
 Page({
 
   /**
@@ -6,6 +6,38 @@ Page({
    */
   data: {
 
+  },
+
+  submit: function (e) {
+    if (e.detail.value.contact == "") {
+      wx.showToast({
+        title: "联系号码没填",
+        icon: 'error',
+        duration: 2000
+      })
+    } else if (e.detail.value.content == "") {
+      wx.showToast({
+        title: "问题未填",
+        icon: 'error',
+        duration: 2000
+      })
+    } else {
+      wx.request({
+        url: getApp().globalData.requestUrl + "/feedback/insert",
+        data: {
+          userId: getApp().globalData.userInfo.id,
+          content: e.detail.value.content,
+          contact: e.detail.value.contact
+        },
+        success: function (res) {
+          wx.showToast({
+            title: '提交成功',
+            icon: 'success',
+            duration: 2000
+          })
+        }
+      })
+    }
   },
 
   /**
@@ -22,35 +54,6 @@ Page({
 
   },
 
-  registerButton:function(){
-    wx.navigateTo({
-      url: '/pages/register/register'
-    })
-  },
-
-  submit: function (e) {
-    wx.request({
-      url: getApp().globalData.requestUrl + "/user/wxLogin",
-      data: {
-        userName: e.detail.value.name,
-        password: e.detail.value.password
-      },
-      success: function (res) {
-        if (res.data.id != undefined) {
-          getApp().globalData.userInfo = res.data;
-          wx.switchTab({
-            url: '/pages/index/index'
-          });
-        } else {
-          wx.showToast({
-            title: '账号密码错误',
-            icon: 'error',
-            duration: 2000
-          })
-        }
-      }
-    })
-  },
   /**
    * 生命周期函数--监听页面显示
    */

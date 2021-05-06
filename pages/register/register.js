@@ -1,4 +1,4 @@
-// pages/login/login.js
+// pages/register/register.js
 Page({
 
   /**
@@ -22,35 +22,6 @@ Page({
 
   },
 
-  registerButton:function(){
-    wx.navigateTo({
-      url: '/pages/register/register'
-    })
-  },
-
-  submit: function (e) {
-    wx.request({
-      url: getApp().globalData.requestUrl + "/user/wxLogin",
-      data: {
-        userName: e.detail.value.name,
-        password: e.detail.value.password
-      },
-      success: function (res) {
-        if (res.data.id != undefined) {
-          getApp().globalData.userInfo = res.data;
-          wx.switchTab({
-            url: '/pages/index/index'
-          });
-        } else {
-          wx.showToast({
-            title: '账号密码错误',
-            icon: 'error',
-            duration: 2000
-          })
-        }
-      }
-    })
-  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -84,6 +55,34 @@ Page({
    */
   onReachBottom: function () {
 
+  },
+
+  submit: function (e) {
+    wx.request({
+      url: getApp().globalData.requestUrl + "/user/register",
+      data: {
+        userName: e.detail.value.name
+      },
+      success: function (res) {
+        if (res.data.id != undefined) {
+          getApp().globalData.userInfo = res.data;
+          wx.showToast({
+            title: '注册成功',
+            icon: 'info',
+            duration: 2000
+          })
+          wx.switchTab({
+            url: '/pages/index/index'
+          });
+        } else {
+          wx.showToast({
+            title: res.data,
+            icon: 'error',
+            duration: 2000
+          })
+        }
+      }
+    })
   },
 
   /**

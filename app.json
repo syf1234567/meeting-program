@@ -5,7 +5,10 @@
     "pages/logs/logs",
     "pages/user/user",
     "pages/proRoom/proRoom",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/register/register",
+    "pages/modifyPassword/modifyPassword",
+    "pages/feedback/feedback"
   ],
   "window": {
     "backgroundTextStyle": "light",

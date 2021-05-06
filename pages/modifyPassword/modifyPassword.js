@@ -1,4 +1,4 @@
-// pages/login/login.js
+// pages/modifyPassword/modifyPassword.js
 Page({
 
   /**
@@ -21,29 +21,38 @@ Page({
   onReady: function () {
 
   },
-
-  registerButton:function(){
-    wx.navigateTo({
-      url: '/pages/register/register'
-    })
-  },
-
   submit: function (e) {
+    let password1 = e.detail.value.password1;
+    let password2 = e.detail.value.password2;
+    let password3 = e.detail.value.password3;
+    if (password2 != password3) {
+      wx.showToast({
+        title: '新密码前后不一致',
+        icon: 'error',
+        duration: 2000
+      })
+    }
     wx.request({
-      url: getApp().globalData.requestUrl + "/user/wxLogin",
+      url: getApp().globalData.requestUrl + "/user/modifyPassword",
       data: {
-        userName: e.detail.value.name,
-        password: e.detail.value.password
+        id: getApp().globalData.userInfo.id,
+        password1: password1,
+        password2: password2
       },
       success: function (res) {
-        if (res.data.id != undefined) {
-          getApp().globalData.userInfo = res.data;
-          wx.switchTab({
-            url: '/pages/index/index'
-          });
-        } else {
+        console.log(res);
+        if(res.data=="修改成功"){
           wx.showToast({
-            title: '账号密码错误',
+            title: '修改成功',
+            icon: 'success',
+            duration: 2000
+          })
+          // wx.switchTab({
+          //   url: '/pages/index/index'
+          // });
+        }else{
+          wx.showToast({
+            title: res.data,
             icon: 'error',
             duration: 2000
           })

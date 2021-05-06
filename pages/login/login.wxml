@@ -7,21 +7,16 @@
       <image src="../../images/logo.jpg" style="width:100%;"></image>
     </view>
 
-
     <view class="inputView1">
       <label class="loginLab">账号</label>
-      <input class="inputText" placeholder="请输入账号"  name="name" />
+      <input class="inputText" placeholder="请输入账号" name="name" />
     </view>
     <view class="line"></view>
-
     <!--密码-->
     <view class="inputView2">
       <label class="loginLab">密码</label>
-      <input class="inputText" password="true" placeholder="请输入密码"  name="password"  />
+      <input class="inputText" password="true" placeholder="请输入密码" name="password" />
     </view>
-
-
-
     <!-- <view style="display:flex;flex-direction:row;padding:40px 80px;">
       <text>用户名:</text>
       <input name="name" style="border:1px solid #ccc;" />
@@ -32,4 +27,6 @@
     </view> -->
     <button class="loginBtn" form-type="submit" type="primary" style="border:1px solid #ccc;">登录</button>
   </form>
+  <button form-type="submit" type="primary"
+      style="border:1px solid #ccc;width:44%;margin-top:10px;border-radius:10px;" bindtap="registerButton" >注册</button>
 </view>

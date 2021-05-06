@@ -1,0 +1,7 @@
+<text style="color:#ccc;font-size:12px;margin:10px;">问题和意见</text>
+<form bindsubmit="submit">
+  <textarea placeholder="请输入描述你的问题和意见..." style="height:100px;border:1px solid #ccc;width:100%;font-size:15px;" name="content"></textarea>
+  <text style="color:#ccc;font-size:12px;margin:10px;">QQ/邮箱</text>
+  <input style="border:1px solid #ccc;font-size:14px;height:40px;" placeholder="(选填,方便我们联系你)" name="contact"/>
+  <button class="loginBtn" form-type="submit" type="primary" style="border:1px solid #ccc;margin-top:40px;">提交</button>
+</form>

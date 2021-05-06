@@ -70,23 +70,15 @@ Page({
 
   },
 
-  editMsgClick:function(){
-      if(this.data.buttonText=="编辑信息"){
-        this.setData({buttonText:"完成信息"})
-      }else{
-        this.setData({
-          buttonText:"编辑信息"
-        })
-        console.log(this.data.userInfo);
-        wx.request({
-          url: getApp().globalData.requestUrl+"/user/update",
-          data:this.data.userInfo,
-          success:function(res){
-          },
-          fail:function(res){
-          }
-        })
-      }
+  exit:function(){
+      console.log("退出登录");
+      wx.navigateTo({url: '/pages/login/login'})
+  },
+  modifyPassword:function(){
+    wx.navigateTo({url: '/pages/modifyPassword/modifyPassword'})
+  },
+  feedback:function(){
+    wx.navigateTo({url: '/pages/feedback/feedback'})
   },
   userNameInput:function(e){
     this.setData({
