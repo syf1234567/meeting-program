@@ -180,11 +180,11 @@ Page({
             if (self.data.selectDay == self.dealTime(0).newday && list.time.split("-")[0] <= nowDate && list.time.split("-")[1] >= nowDate && history.status == '未预约') {
               msg = "开门";
             }
-            if (history.status == "已预约" && list.time == history.subscribeTime&&self.data.selectDay==history.day) {
+            if (history.status == "已预约" && list.time == history.subscribeTime && self.data.selectDay == history.day) {
               msg = "已预约";
             }
             if (self.data.selectDay == self.dealTime(0).newday && list.time == history.subscribeTime) {
-              if (getApp().globalData.userInfo.id == history.userId&&list.time.split("-")[0] <= nowDate && list.time.split("-")[1] >= nowDate) {
+              if (getApp().globalData.userInfo.id == history.userId && list.time.split("-")[0] <= nowDate && list.time.split("-")[1] >= nowDate) {
                 msg = "自己开门"
               } else if (list.time == history.subscribeTime && self.data.selectDay == history.day && history.status == "已预约") {
                 msg = "已预约";
@@ -239,7 +239,15 @@ Page({
           userId: getApp().globalData.userInfo.id
         },
         success: function (res) {
-          self.getState(self.data.roomId, self.data.selectDay)
+          if (res.data == "预约成功") {
+            self.getState(self.data.roomId, self.data.selectDay)
+          } else {
+            wx.showToast({
+              title: res.data,
+              icon: 'none',
+              duration: 1500
+            })
+          }
         }
       })
     }
