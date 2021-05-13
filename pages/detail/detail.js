@@ -92,11 +92,11 @@ Page({
       let date = new Date();
       let hour = date.getHours()
       let minute = date.getMinutes()
-      if(hour<10){
-        hour = "0"+hour;
+      if (hour < 10) {
+        hour = "0" + hour;
       }
-      if(minute<10){
-        minute = "0"+minute;
+      if (minute < 10) {
+        minute = "0" + minute;
       }
       nowDate = hour + ":" + minute
     }
@@ -111,17 +111,17 @@ Page({
         let listData = res.data
         listData.forEach(function (list, index) {
           let msg = ""
-          if (self.data.selectDay == self.dealTime(0).newday  && list.status=="已预约") {
-            if(list.subscribeTime.split("-")[1] >= nowDate && list.subscribeTime.split("-")[0] <= nowDate){
+          if (self.data.selectDay == self.dealTime(0).newday && list.status == "已预约") {
+            if (list.subscribeTime.split("-")[1] >= nowDate && list.subscribeTime.split("-")[0] <= nowDate) {
               msg = "签到";
-            }else if (list.subscribeTime.split("-")[1] <= nowDate){
+            } else if (list.subscribeTime.split("-")[1] <= nowDate) {
               msg = "超时";
             }
           }
-          if(list.status=="已预约"){
+          if (list.status == "已预约") {
             list.operate = "取消预约"
           }
-          if(list.status=="开门"){
+          if (list.status == "开门") {
             list.status = "可开门"
             list.operate = "开门"
           }
@@ -129,7 +129,7 @@ Page({
             list.status = "可开门"
             list.operate = "开门"
           }
-          if(list.status=="取消预约"){
+          if (list.status == "取消预约") {
             list.status = "已取消预约"
             list.operate = ""
           }
@@ -158,7 +158,7 @@ Page({
         }
       })
     }
-    if(e.currentTarget.dataset.operate == "开门"){
+    if (e.currentTarget.dataset.operate == "开门") {
       wx.request({
         url: getApp().globalData.requestUrl + "/meetingRoom/getById",
         data: {
@@ -175,7 +175,16 @@ Page({
               deviceId: res.data.deviceId,
               msg_id: res.data.msgId,
               service: JSON.parse(res.data.service)
-            }
+            },
+            method: 'post',
+            success: function (res) {
+              wx.showToast({
+                title: '开门成功',
+                icon: 'success',
+                duration: 2000
+              })
+            },
+            error: function (params) {}
           })
         }
       })

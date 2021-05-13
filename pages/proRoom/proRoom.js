@@ -274,6 +274,7 @@ Page({
           id: this.data.roomId
         },
         success: function (res) {
+          console.log(res.data.service);
           wx.request({
             url: 'http://www.jyyltech.com/IOTREST/UserInfoService/OPENAPI/BasicApi/',
             data: {
@@ -284,6 +285,13 @@ Page({
               deviceId: res.data.deviceId,
               msg_id: res.data.msgId,
               service: JSON.parse(res.data.service)
+            },
+            success: function (res) {
+              wx.showToast({
+                title: '开门成功',
+                icon: 'success',
+                duration: 2000
+              })
             }
           })
         }
