@@ -27,6 +27,12 @@
         {
           "name": "pages/feedback/feedback",
           "pathName": "pages/feedback/feedback",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
           "scene": null
         }
       ]

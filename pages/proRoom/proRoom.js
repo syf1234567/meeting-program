@@ -225,6 +225,19 @@ Page({
   },
 
   proButton: function (e) {
+    if (getApp().globalData.userInfo.id == undefined) {
+      wx.showModal({
+        title: '提示',
+        content: '你还没有登录',
+        success: function (res) {
+          if (res.confirm) {//这里是点击了确定以后
+            wx.navigateTo({url: '/pages/login/login'})
+          } else {//这里是点击了取消以后
+            
+          }
+        }
+      })
+    }
     let subscribeTime = e.currentTarget.dataset.subscribetime;
     let operate = e.currentTarget.dataset.operate;
     let self = this;

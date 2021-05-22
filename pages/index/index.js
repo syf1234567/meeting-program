@@ -15,18 +15,32 @@ Page({
     })
     let self = this
     if (e.currentTarget.dataset.idx == 1) {
-      wx.request({
-        url: app.globalData.requestUrl + "/meetingRoom/getByUserId",
-        data: {
-          userId: getApp().globalData.userInfo.id,
-          day: this.dealTime(0).newday
-        },
-        success: function (res) {
-          self.setData({
-            myRoom: res.data
-          })
-        }
-      })
+      if (getApp().globalData.userInfo.id == undefined) {
+        wx.showModal({
+          title: '提示',
+          content: '你还没有登录',
+          success: function (res) {
+            if (res.confirm) {//这里是点击了确定以后
+              wx.navigateTo({url: '/pages/login/login'})
+            } else {//这里是点击了取消以后
+              
+            }
+          }
+        })
+      } else {
+        wx.request({
+          url: app.globalData.requestUrl + "/meetingRoom/getByUserId",
+          data: {
+            userId: getApp().globalData.userInfo.id,
+            day: this.dealTime(0).newday
+          },
+          success: function (res) {
+            self.setData({
+              myRoom: res.data
+            })
+          }
+        })
+      }
     }
   },
   getMyPro: function () {

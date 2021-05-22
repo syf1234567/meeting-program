@@ -42,6 +42,6 @@ App({
   },
   globalData: {
     userInfo: {},
-    requestUrl:"http://127.0.0.1:8080/api"
+    requestUrl:"https://106.14.133.85:8443/api"
   }
 })
