@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    contentInput: '',
+    contactInput: ''
   },
 
   submit: function (e) {
@@ -22,6 +23,7 @@ Page({
         duration: 2000
       })
     } else {
+      let self = this
       wx.request({
         url: getApp().globalData.requestUrl + "/feedback/insert",
         data: {
@@ -34,6 +36,10 @@ Page({
             title: '提交成功',
             icon: 'success',
             duration: 2000
+          })
+          self.setData({
+            contentInput: '',
+            contactInput: ''
           })
         }
       })

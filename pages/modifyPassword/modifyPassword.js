@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    password1: '',
+    password2: '',
+    password3: '',
   },
 
   /**
@@ -32,6 +34,7 @@ Page({
         duration: 2000
       })
     }
+    let self = this;
     wx.request({
       url: getApp().globalData.requestUrl + "/user/modifyPassword",
       data: {
@@ -41,16 +44,21 @@ Page({
       },
       success: function (res) {
         console.log(res);
-        if(res.data=="修改成功"){
+        if (res.data == "修改成功") {
           wx.showToast({
             title: '修改成功',
             icon: 'success',
             duration: 2000
           })
+          self.setData({
+            password1: '',
+            password2: '',
+            password3: ''
+          })
           // wx.switchTab({
           //   url: '/pages/index/index'
           // });
-        }else{
+        } else {
           wx.showToast({
             title: res.data,
             icon: 'error',
